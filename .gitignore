@@ -1,0 +1,12 @@
+# Build
+build/
+dist/
+.build/
+.swiftpm/
+*.profraw
+
+# macOS / Xcode
+.DS_Store
+xcuserdata/
+*.xcuserstate
+
