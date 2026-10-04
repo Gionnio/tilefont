@@ -40,7 +40,6 @@
 "Prova del testo" = "Text test";
 "Riavvia ora" = "Restart Now";
 "Riavvia Tilefont per applicare la nuova lingua." = "Restart Tilefont to apply the new language.";
-"Rimuovi" = "Remove";
 "Salva il font in assets/fonts del progetto «%@», pronto da usare in GB Studio (⌘E)" = "Save the font in the assets/fonts folder of “%@”, ready to use in GB Studio (⌘E)";
 "Salva immagine…" = "Save Image…";
 "Salva l'immagine del font (PNG e il suo .json) in una cartella a scelta (⌘S)" = "Save the font image (PNG and its .json) to a folder of your choice (⌘S)";
@@ -56,6 +55,9 @@
 "Stile" = "Style";
 "Tema" = "Theme";
 "Testo di prova" = "Sample text";
+"Togli il progetto da Tilefont. Il progetto e i suoi file restano dove sono." = "Removes the project from Tilefont. The project and its files stay where they are.";
+"Togli il progetto" = "Remove project";
+"Togli" = "Remove";
 "Trascina qui un font" = "Drop a font here";
 "Troppo alti, tagliati in basso: %@" = "Too tall, cut at the bottom: %@";
 "Troppo larghi, tagliati a destra: %@" = "Too wide, cut on the right: %@";

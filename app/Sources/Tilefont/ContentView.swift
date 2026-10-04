@@ -102,6 +102,15 @@ private struct Sidebar: View {
                             .foregroundStyle(.secondary)
                             .help(model.projectPath)
                         Button("Scegli…") { model.chooseProject() }
+                        if model.projectURL != nil {
+                            Button { model.projectPath = "" } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundStyle(.secondary)
+                            }
+                            .buttonStyle(.borderless)
+                            .accessibilityLabel(Text("Togli il progetto"))
+                            .help(String(localized: "Togli il progetto da Tilefont. Il progetto e i suoi file restano dove sono."))
+                        }
                     }
                 }
                 if let project = model.projectURL {

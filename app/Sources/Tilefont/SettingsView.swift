@@ -41,7 +41,8 @@ struct SettingsView: View {
                             .foregroundStyle(.secondary)
                         Button("Scegli…") { model.chooseProject() }
                         if !model.projectPath.isEmpty {
-                            Button("Rimuovi") { model.projectPath = "" }
+                            Button("Togli") { model.projectPath = "" }
+                                .help(String(localized: "Togli il progetto da Tilefont. Il progetto e i suoi file restano dove sono."))
                         }
                     }
                 }
