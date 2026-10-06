@@ -7,6 +7,8 @@
 
 **Tilefont** is a native macOS app that turns any TrueType or OpenType font into a font image ready for [GB Studio](https://www.gbstudio.dev): 128×112 pixels, 8×8 tiles, the same colours as GB Studio's own fonts, magenta variable-width markers and the `.json` file with the font name and character mapping.
 
+<p align="center"><img src="docs/icon.png" width="160" alt="Tilefont icon"></p>
+
 ![Tilefont](docs/screenshot.png)
 
 ## ✨ Features
