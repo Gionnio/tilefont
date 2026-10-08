@@ -62,29 +62,30 @@ struct SettingsView: View {
 
 private struct LanguagePicker: View {
     @State private var choice = LanguagePicker.current
-    private let initial = LanguagePicker.current
+    @State private var askRelaunch = false
 
     var body: some View {
-        Picker("Lingua", selection: $choice) {
-            Text("Sistema").tag("")
-            Text(verbatim: "Italiano").tag("it")
-            Text(verbatim: "English").tag("en")
-        }
-        .onChange(of: choice) { _, v in
-            if v.isEmpty {
-                UserDefaults.standard.removeObject(forKey: "AppleLanguages")
-            } else {
-                UserDefaults.standard.set([v], forKey: "AppleLanguages")
+        VStack(alignment: .leading, spacing: 4) {
+            Picker(selection: Binding(get: { choice }, set: { v in
+                choice = v
+                if v.isEmpty {
+                    UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+                } else {
+                    UserDefaults.standard.set([v], forKey: "AppleLanguages")
+                }
+                askRelaunch = true
+            })) {
+                Text("Sistema").tag("")
+                Text(verbatim: "Italiano").tag("it")
+                Text(verbatim: "English").tag("en")
+            } label: {
+                Text("Lingua")
             }
+            Text("Tilefont si riavvia per cambiare lingua.").font(.caption).foregroundStyle(.secondary)
         }
-        if choice != initial {
-            HStack {
-                Text("Riavvia Tilefont per applicare la nuova lingua.")
-                    .font(.caption)
-                    .foregroundStyle(.orange)
-                Spacer()
-                Button("Riavvia ora") { Self.relaunch() }
-            }
+        .alert("Riavviare Tilefont per cambiare lingua?", isPresented: $askRelaunch) {
+            Button("Riavvia ora") { Relauncher.relaunch() }
+            Button("Più tardi", role: .cancel) {}
         }
     }
 
@@ -92,13 +93,27 @@ private struct LanguagePicker: View {
         let domain = UserDefaults.standard.persistentDomain(forName: Bundle.main.bundleIdentifier ?? "") ?? [:]
         return (domain["AppleLanguages"] as? [String])?.first.map { String($0.prefix(2)) } ?? ""
     }
+}
 
-    /// Una nuova istanza parte e questa si chiude
+/// Chiude l'app e la riapre quando è davvero chiusa, così non ne restano due aperte.
+/// La riapertura parte solo se la chiusura va a buon fine (es. confermata con la coda in corso).
+enum Relauncher {
+    private static var requested: Date?
+    private static var observer: NSObjectProtocol?
+
     static func relaunch() {
-        let config = NSWorkspace.OpenConfiguration()
-        config.createsNewApplicationInstance = true
-        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: config) { _, _ in
-            DispatchQueue.main.async { NSApp.terminate(nil) }
+        requested = Date()
+        if observer == nil {
+            observer = NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
+                guard let asked = requested, Date().timeIntervalSince(asked) < 120 else { return }
+                let pid = ProcessInfo.processInfo.processIdentifier
+                let task = Process()
+                task.executableURL = URL(fileURLWithPath: "/bin/sh")
+                task.arguments = ["-c", "while /bin/kill -0 \(pid) 2>/dev/null; do sleep 0.2; done; /usr/bin/open \"$0\"", Bundle.main.bundlePath]
+                try? task.run()
+            }
         }
+        for window in NSApp.windows { window.attachedSheet.map { window.endSheet($0) } }
+        NSApp.terminate(nil)
     }
 }

@@ -38,8 +38,6 @@
 "Non presenti nel font, caselle vuote: %@" = "Not in the font, left empty: %@";
 "Progetto" = "Project";
 "Prova del testo" = "Text test";
-"Riavvia ora" = "Restart Now";
-"Riavvia Tilefont per applicare la nuova lingua." = "Restart Tilefont to apply the new language.";
 "Salva il font in assets/fonts del progetto «%@», pronto da usare in GB Studio (⌘E)" = "Save the font in the assets/fonts folder of “%@”, ready to use in GB Studio (⌘E)";
 "Salva immagine…" = "Save Image…";
 "Salva l'immagine del font (PNG e il suo .json) in una cartella a scelta (⌘S)" = "Save the font image (PNG and its .json) to a folder of your choice (⌘S)";
@@ -63,3 +61,7 @@
 "Troppo larghi, tagliati a destra: %@" = "Too wide, cut on the right: %@";
 "TTF, OTF o TTC · oppure fai clic per sceglierlo" = "TTF, OTF or TTC · or click to choose one";
 "“Aggiungi al progetto” salva il PNG e il suo .json in assets/fonts del progetto: GB Studio li trova da soli." = "“Add to Project” saves the PNG and its .json in the project's assets/fonts folder, where GB Studio picks them up automatically.";
+"Tilefont si riavvia per cambiare lingua." = "Tilefont restarts to change language.";
+"Riavviare Tilefont per cambiare lingua?" = "Relaunch Tilefont to change the language?";
+"Riavvia ora" = "Relaunch Now";
+"Più tardi" = "Later";

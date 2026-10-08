@@ -9,8 +9,8 @@ cd "$(dirname "$0")"
 ROOT="$(pwd)"
 BUILD="$ROOT/build"
 APP="$BUILD/Tilefont.app"
-VERSION="1.0.0"
-BUILD_NUMBER="1"
+VERSION="1.0.1"
+BUILD_NUMBER="2"
 
 mkdir -p "$BUILD"
 
